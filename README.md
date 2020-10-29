@@ -16,10 +16,6 @@ https://github.com/project-violet/koromo-copy/tree/master/Koromo%20Copy/Script
 
 ## Test
 
-### Json Parser
-
-Check https://github.com/xxx1720 repositories.
-
 ### Parser Generation
 
 ```
