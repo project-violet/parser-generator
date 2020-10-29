@@ -2,6 +2,18 @@
 
 Simple LALR parser generator written in C#
 
+This source code was part of `koromo-copy` and is now a standalone library.
+The koromo-copy's srcal script(https://github.com/project-violet/koromo-copy/blob/master/Koromo%20Copy/Script/SRCAL/SRCALEngine.cs) was useful.
+However, it has the disadvantage that it is difficult to port to multiple platforms.
+This project provides a simple way to download and run scripts in real time by sharing a parser tree.
+
+Refer To:
+
+https://github.com/project-violet/koromo-copy/tree/master/Koromo%20Copy/LP
+
+https://github.com/project-violet/koromo-copy/tree/master/Koromo%20Copy/Script
+
+
 ## Test
 
 ### Json Parser
