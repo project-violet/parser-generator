@@ -17,6 +17,9 @@ namespace script
             var scanner = ScriptScannerDesc.Create();
             var parser = ScriptParserDesc.Create();
 
+            Console.WriteLine(scanner.ToDartCode("asdf"));
+            Console.WriteLine(parser.ToDartCode("asdf"));
+/*
 #if DEBUG
             //
             //  Accept Test Set
@@ -57,7 +60,7 @@ if (or(gre(sum(x,y), sub(x,y)), iscon(x,y,z))) [
 ] else if (not(iscon(x,y,z))) [
     k[2] = 7
 ]
-"));
+"));*/
         }
 
         static void Test1(Scanner scanner, ExtendedShiftReduceParser parser, string target)

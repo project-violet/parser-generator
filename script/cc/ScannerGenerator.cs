@@ -1224,5 +1224,38 @@ namespace ParserGenerator
             append("}");
             return builder.ToString();
         }
+
+        public string ToDartCode(string class_name)
+        {
+            var builder = new StringBuilder();
+            var indent = "";
+            Action up_indent = () => { indent += "    "; };
+            Action down_indent = () => { if (indent.Length > 0) indent = indent.Substring(4); };
+            Action<string> append = (string s) => { builder.Append($"{indent}{s}\r\n"); };
+            append("class " + class_name);
+            append("{");
+            up_indent();
+
+            ///////////////////
+            append("List<List<int>> transitionTable = [");
+            up_indent();
+            foreach (var gt in transition_table)
+                append("[" + string.Join(",", gt.Select(x => x.ToString().PadLeft(4))) + " ],");
+            down_indent();
+            append("];");
+            append("");
+
+            ///////////////////
+            append("List<String> acceptTable = [");
+            up_indent();
+            append(string.Join(",", accept_table.Select(x => x != null ? $"\"{x.ToString().PadLeft(4)}\"" : "null")));
+            down_indent();
+            append("];");
+            append("");
+
+            down_indent();
+            append("}");
+            return builder.ToString();
+        }
     }
 }

@@ -2365,5 +2365,60 @@ namespace ParserGenerator
             append("}");
             return builder.ToString();
         }
+        
+        public string ToDartCode(string class_name)
+        {
+            var builder = new StringBuilder();
+            var indent = "";
+            Action up_indent = () => { indent += "    "; };
+            Action down_indent = () => { if (indent.Length > 0) indent = indent.Substring(4); };
+            Action<string> append = (string s) => { builder.Append($"{indent}{s}\r\n"); };
+            append("class " + class_name);
+            append("{");
+            up_indent();
+
+            ///////////////////
+            append("Map<String, int> symbolTable = ");
+            append("{");
+            up_indent();
+            foreach (var st in symbol_name_index)
+                append(('"' + st.Key + '"').PadLeft(symbol_name_index.Select(x => x.Key.Length).Max() + 3) + ":" + st.Value.ToString().PadLeft(4) + " ,");
+            down_indent();
+            append("};");
+            append("");
+
+            ///////////////////
+            append("List<List<int>> gotoTable = [");
+            up_indent();
+            foreach (var gt in table)
+                append("[" + string.Join(",", gt.Select(x => x.ToString().PadLeft(4))) + " ],");
+            down_indent();
+            append("];");
+            append("");
+
+            ///////////////////
+            append("List<int> production = [");
+            up_indent();
+            append(string.Join(",", production.Select(x => x.ToString().PadLeft(4))));
+            down_indent();
+            append("];");
+            append("");
+
+            ///////////////////
+            append("List<int> groupTable = [");
+            up_indent();
+            append(string.Join(",", group_table.Select(x => x.ToString().PadLeft(4))));
+            down_indent();
+            append("];");
+            append("");
+
+            ///////////////////
+            append("int accept = " + accept + ";");
+            append("");
+
+            down_indent();
+            append("}");
+            return builder.ToString();
+        }
     }
 }
